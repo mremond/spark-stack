@@ -9,6 +9,26 @@ services:
     ports:
       #  7000 for cluster communication (7001 if SSL is enabled), 9042 for native protocol clients, and 7199
       - "9042:9042"
+  zookeeper:
+    image: confluent/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"   
+  kafka:
+    image: confluent/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    links:
+      - zookeeper:zookeeper
+  registry:
+    image: confluent/schema-registry
+    container_name: schema-registry
+    ports:
+      - "8081:8081"
+    links:
+      - kafka:kafka
+      - zookeeper:zookeeper
 
 volumes:
   cassandra:
