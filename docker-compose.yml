@@ -23,12 +23,19 @@ services:
       - zookeeper:zookeeper
   registry:
     image: confluent/schema-registry
-    container_name: schema-registry
+    container_name: registry
     ports:
       - "8081:8081"
     links:
       - kafka:kafka
       - zookeeper:zookeeper
+  spark:
+    image: sequenceiq/spark 
+    container_name: spark
+    links:
+      - kafka:kafka
+      - zookeeper:zookeeper
+      - registry:registry
 
 volumes:
   cassandra:
