@@ -21,6 +21,9 @@ services:
       - "9092:9092"
     links:
       - zookeeper:zookeeper
+    # This is required to connect from host, so that Kafka provides correct metadata
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=localhost
   registry:
     image: confluent/schema-registry
     container_name: registry
