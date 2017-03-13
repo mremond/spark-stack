@@ -19,3 +19,9 @@ You can thus use Kafka tool to create topic:
 ```
 kafka-topics --create --zookeeper zookeeper --replication-factor 1 --partitions 2 --topic word-count
 ```
+
+### Connect to Spark server
+
+```
+docker exec -it $(docker-compose ps -q spark) bash
+```
