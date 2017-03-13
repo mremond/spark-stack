@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  db:
+    image: cassandra
+    container_name: cassandra
+    volumes:
+       - cassandra:/var/lib/cassandra
+    ports:
+      #  7000 for cluster communication (7001 if SSL is enabled), 9042 for native protocol clients, and 7199
+      - "9042:9042"
+
+volumes:
+  cassandra:
